@@ -1,2 +1,2 @@
-# zeppelin-web-vue
-Zeppelin Web using Vue.js
+# zeppelin-studio
+Zeppelin Notebooks IDE using Vue.js
