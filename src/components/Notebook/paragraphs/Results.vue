@@ -134,7 +134,7 @@ export default {
         rowData.push(rows[j].split('\t'))
       }
 
-      //console.log(rowData)
+      // console.log(rowData)
 
       return {
         columnNames: colNames,

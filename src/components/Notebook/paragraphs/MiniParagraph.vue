@@ -33,7 +33,7 @@ export default {
     },
     setTitle: function () {
       let paragraph = this.$props.paragraph
-      let {id, text, config, params} = paragraph
+      let { id, text, config, params } = paragraph
       let newTitle = this.$refs.addTitle.value
 
       paragraph.title = newTitle
