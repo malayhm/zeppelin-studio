@@ -15,6 +15,8 @@
     <div
       v-else
       class="notebook">
+      <NotebookControls />
+
       <div
         class="paragraph-container"
       >
@@ -35,6 +37,7 @@
 <script>
 import ws from '@/services/ws'
 
+import NotebookControls from './Controls.vue'
 import Paragraph from './paragraphs/Paragraph.vue'
 
 export default {
@@ -43,6 +46,7 @@ export default {
     note: { required: true }
   },
   components: {
+    NotebookControls,
     Paragraph
   },
   data () {

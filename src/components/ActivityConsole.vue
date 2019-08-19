@@ -44,7 +44,7 @@ export default {
     },
     isActivityLoading () {
       return this.$store.state.isActivityLoading
-    },
+    }
   },
   created () {
 
@@ -52,7 +52,6 @@ export default {
   mounted () {
     this.getActivities()
   },
-
   methods: {
     getActivities () {
       ws.send({ op: 'LIST_NOTE_JOBS' })
