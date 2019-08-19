@@ -1,6 +1,8 @@
 # zeppelin-studio
 Zeppelin Notebooks IDE using Vue.js
 
+![zeppelin-studio preview](https://github.com/malayhm/zeppelin-studio/blob/master/public/zeppelin-studio-ide-2.gif?raw=true)
+
 ## Project setup
 ```
 npm install
