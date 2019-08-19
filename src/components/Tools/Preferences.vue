@@ -11,18 +11,17 @@
       href="javascript: void(0);"
       @click="hidePreferences()"
     >
-      <x-icon size="1x" />
+      <a-icon type="close" />
     </a>
   </div>
 </template>
 
 <script>
-import { XIcon } from 'vue-feather-icons'
 
 export default {
   name: 'Preferences',
   components: {
-    'x-icon': XIcon
+
   },
   computed: {
     showPrefererences () {
@@ -61,7 +60,6 @@ export default {
 
   .headline {
     margin: 0 auto;
-    letter-spacing: 2px !important;
     font-size: 16px;
     font-family: Open Sans;
     text-align: center;

@@ -4,73 +4,49 @@
       <li>
         <a
           :class="{'active': this.$store.state.selectedLeftNavTab === 'folders'}"
+          placement="right"
           href="javascript:void(0);"
           data-ref="folders"
           @click="selectTab('folders')"
-          v-b-tooltip.hover.right
-          title="Folders"
         >
-          <folder-icon />
+          <a-tooltip placement="right">
+            <template slot="title">
+              <span>Folders</span>
+            </template>
+            <a-icon type="folder" />
+          </a-tooltip>
         </a>
       </li>
+
       <li>
         <a
-          :class="{'active': this.$store.state.selectedLeftNavTab === 'interpreters'}"
+          :class="{'active': this.$store.state.selectedLeftNavTab === 'activity'}"
           href="javascript:void(0);"
-          data-ref="interpreters"
-          @click="selectTab('interpreters')"
-          v-b-tooltip.hover.right
-          title="Interpreters"
+          data-ref="activity"
+          @click="selectTab('activity')"
         >
-          <sliders-icon />
+          <a-tooltip placement="right">
+            <template slot="title">
+              <span>Activity</span>
+            </template>
+            <a-icon type="eye" />
+          </a-tooltip>
         </a>
       </li>
+
       <li>
         <a
           :class="{'active': this.$store.state.selectedLeftNavTab === 'helium'}"
           href="javascript:void(0);"
           data-ref="helium"
           @click="selectTab('helium')"
-          v-b-tooltip.hover.right
-          title="Helium"
         >
-          <package-icon />
-        </a>
-      </li>
-      <li>
-        <a
-          :class="{'active': this.$store.state.selectedLeftNavTab === 'repositories'}"
-          href="javascript:void(0);"
-          data-ref="repositories"
-          @click="selectTab('repositories')"
-          v-b-tooltip.hover.right
-          title="Notebook Repositories"
-        >
-          <database-icon />
-        </a>
-      </li>
-      <!-- <li>
-        <a
-          :class="{'active': this.$store.state.selectedLeftNavTab === 'processing'}"
-          href="javascript:void(0);"
-          data-ref="processing"
-          @click="selectTab('processing')"
-          v-b-tooltip.hover.right
-          title="Processing"
-        >
-          <server-icon />
-        </a>
-      </li> -->
-      <li>
-        <a
-          :class="{'active': this.$store.state.selectedLeftNavTab === 'tablist'}"
-          href="javascript:void(0);"
-          data-ref="tablist"
-          @click="selectTab('tablist')"
-          v-b-tooltip.hover.right
-          title="Tabs"
-        >
-          <layers-icon />
+          <a-tooltip placement="right">
+            <template slot="title">
+              <span>Helium</span>
+            </template>
+            <a-icon type="experiment" />
+          </a-tooltip>
         </a>
       </li>
     </ul>
@@ -83,10 +59,13 @@
             class=""
             href="javascript:void(0);"
             @click="togglePreferences()"
-            v-b-tooltip.hover.right
-            title="Preferences"
           >
-            <settings-icon />
+            <a-tooltip placement="right">
+              <template slot="title">
+                <span>Preferences</span>
+              </template>
+              <a-icon type="setting" />
+            </a-tooltip>
           </a>
         </li>
       </ul>
@@ -95,18 +74,10 @@
 </template>
 
 <script>
-import { FolderIcon, SlidersIcon, PackageIcon, DatabaseIcon, ServerIcon, LayersIcon, SettingsIcon } from 'vue-feather-icons'
-
 export default {
   name: 'LeftNavBar',
   components: {
-    'folder-icon': FolderIcon,
-    'sliders-icon': SlidersIcon,
-    'package-icon': PackageIcon,
-    'database-icon': DatabaseIcon,
-    'server-icon': ServerIcon,
-    'layers-icon': LayersIcon,
-    'settings-icon': SettingsIcon
+
   },
   computed: {
     showPrefererences () {

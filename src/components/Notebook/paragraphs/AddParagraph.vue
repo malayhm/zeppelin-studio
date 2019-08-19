@@ -3,10 +3,10 @@
     <div class="in"></div>
     <div class="options-x">
       <span v-on:click="addParagraph(false)" class="add-options">
-        <code-icon size="1x" /> Code
+        <a-icon type="code" /> Code
       </span>
       <span v-on:click="addParagraph(true)" class="add-options">
-        <edit-3-icon size="1x" /> Text
+        <a-icon type="edit" /> Text
       </span>
     </div>
   </div>
@@ -16,12 +16,10 @@
 import ws from '@/services/ws'
 import uuidvtimestamp from 'uuid/v1'
 
-import { CodeIcon, Edit3Icon } from 'vue-feather-icons'
 export default {
   name: 'add-paragraph',
   components: {
-    'code-icon': CodeIcon,
-    'edit-3-icon': Edit3Icon
+
   },
   props: ['index', 'notebookId'],
   data () {

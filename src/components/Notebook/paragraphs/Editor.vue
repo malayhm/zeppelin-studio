@@ -14,25 +14,41 @@
     <div v-show="!hideEditor" class="editor-wrapper">
       <span class="controls">
         <span v-show="!getParagraphLoading && !getParagraphInit" v-on:click="runParagraph()" class="play">
-          <play-circle-icon />
+          <a-icon type="play-circle" />
         </span>
         <div v-show="getParagraphLoading" class="lds-ring"><div></div><div></div><div></div><div></div></div>
         <div v-show="getParagraphInit" class="lds-ring pending-add-paragraph"><div></div><div></div><div></div><div></div></div>
       </span>
       <div v-on:keyup.shift.enter="runParagraph()" class="editor-main">
-        <div class="dropdown">
-          <span data-toggle="dropdown" class="options">
-            <more-horizontal-icon />
-          </span>
-          <div class="dropdown-menu editor-options">
-            <a class="dropdown-item" href="#">Toggle Editor</a>
-            <a class="dropdown-item" href="#">Toggle Line Numbers</a>
-            <a class="dropdown-item" href="#">Toggle Title</a>
-            <a class="dropdown-item" href="#">Clear Output</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" v-on:click="removeParagraph()" href="javascript:void(0)">Delete Paragraph</a>
-          </div>
-        </div>
+        <a-dropdown>
+          <a class="ant-dropdown-link" href="#">
+            <a-icon type="ellipsis" />
+          </a>
+          <a-menu slot="overlay">
+            <a-menu-item>
+              <a href="javascript:;">Toggle Editor</a>
+            </a-menu-item>
+            <a-menu-item>
+              <a href="javascript:;">Toggle Line Numbers</a>
+            </a-menu-item>
+            <a-menu-item>
+              <a href="javascript:;">Toggle Title</a>
+            </a-menu-item>
+            <a-menu-item>
+              <a href="javascript:;">Clear Output</a>
+            </a-menu-item>
+            <a-menu-divider />
+            <a-menu-item>
+              <a
+                @click="removeParagraph()"
+                href="javascript:;"
+              >
+                Delete Paragraph
+              </a>
+            </a-menu-item>
+          </a-menu>
+        </a-dropdown>
+
         <AceEditor :ref="setEditorId()" v-model="content" @init="editorInit" lang="scala" theme="chrome" height="50" :options="setOptions"/>
       </div>
     </div>
@@ -41,20 +57,15 @@
 
 <script>
 // import _ from 'underscore'
-import mixin from '../../../mixins/mixin.js'
+import ws from '@/services/ws'
 import marked from 'marked'
 import MDEditor from './MDEditor.vue'
-import { PlayCircleIcon, MoreHorizontalIcon } from 'vue-feather-icons'
 
 export default {
   name: 'Editor',
-  mixins: [mixin],
   components: {
     'AceEditor': require('vue2-ace-editor'),
-    'MDEditor': MDEditor,
-
-    'play-circle-icon': PlayCircleIcon,
-    'more-horizontal-icon': MoreHorizontalIcon
+    'MDEditor': MDEditor
   },
   watch: {
     content: function (newContent) {
@@ -163,6 +174,7 @@ export default {
         }
 
         this.$store.dispatch('setParagraph', {
+          notebookId: this.$props.notebookId,
           paragraph: paragraph
         })
 
@@ -203,9 +215,7 @@ export default {
         paragraphText = '%md\n' + this.mdValue
       }
 
-      let websocketEvents = this.getWebSocketObject()
-
-      websocketEvents.sendNewEvent({
+      ws.send({
         op: 'RUN_PARAGRAPH',
         data: {
           id: id,
@@ -218,14 +228,13 @@ export default {
     },
     removeParagraph: function () {
       let { id } = this.$props.paragraph
-      let websocketEvents = this.getWebSocketObject()
 
       // remove from ui instantly
       this.$store.dispatch('removeParagraph', {
         id: id
       })
 
-      websocketEvents.sendNewEvent({
+      ws.send({
         op: 'PARAGRAPH_REMOVE',
         data: {
           id: id
@@ -255,7 +264,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   .md-paragraph ul li p {
     margin: 0;
   }
@@ -301,6 +310,15 @@ export default {
 
   .editor-main {
     background: #f7f7f7;
+    position: relative;
+
+    .ant-dropdown-link {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      z-index: 999;
+      margin: 2px 8px;
+    }
   }
 
   .editor-wrapper:hover,
@@ -399,9 +417,5 @@ export default {
     margin-top: 0px;
     outline: 0;
     margin-bottom: 0px;
-  }
-
-  .editor-options .dropdown-item {
-    font-size: 12px
   }
 </style>

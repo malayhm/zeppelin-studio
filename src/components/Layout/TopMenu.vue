@@ -37,15 +37,6 @@
           </ul>
         </li>
 
-        <!-- Job Menu
-        <li> Job
-          <ul>
-            <li>
-              <router-link to="/jobs">Jobs</router-link>
-            </li>
-          </ul>
-        </li> -->
-
         <!-- Edit Menu -->
         <li> Edit
           <ul>
@@ -85,6 +76,15 @@
           </ul>
         </li>
 
+        <!-- View Menu -->
+        <li> View
+          <ul>
+            <li>
+
+            </li>
+          </ul>
+        </li>
+
         <!-- Runtime Menu -->
         <li> Runtime
           <ul>
@@ -92,10 +92,38 @@
               <router-link to="#">Run All</router-link>
             </li>
             <li>
-              <router-link to="/interpreter">Interpreters</router-link>
+              <a
+                href="javascript:void(0)"
+              >
+                Interpreters
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Settings -->
+        <li> Settings
+          <ul>
+            <li>
+              <a
+                href="javascript:void(0)"
+              >
+                Notebook Repository
+              </a>
             </li>
             <li>
-              <router-link to="/">Interpreter bindings</router-link>
+              <a
+                href="javascript:void(0)"
+              >
+                Credentials
+              </a>
+            </li>
+            <li>
+              <a
+                href="javascript:void(0)"
+              >
+                Configuration
+              </a>
             </li>
           </ul>
         </li>

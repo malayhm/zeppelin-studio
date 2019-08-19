@@ -27,7 +27,7 @@
           :class="{'active':  note.id === activeNotebookId}"
           v-on:click="openNotebook(note)"
         >
-          <file-icon size="1.2x" />
+          <a-icon type="file" />
           {{ getFileName(note.path) }}
         </a>
         <!-- <router-link
@@ -37,7 +37,7 @@
           :class="{'active':  note.id === activeNotebookId}"
           v-on:click="openNotebook(note)"
         >
-          <file-icon size="1.2x" />
+          <a-icon type="file" />
           {{ note.path }}
         </router-link> -->
       </li>
@@ -46,19 +46,17 @@
 </template>
 
 <script>
-import { FileIcon } from 'vue-feather-icons'
 import ws from '@/services/ws'
 
 export default {
   name: 'StatusBar',
   components: {
-    'file-icon': FileIcon
+
   },
   created () {
 
   },
   mounted () {
-    // this.$store.state.NotebookStore.isLoading = true
     ws.send({ op: 'LIST_NOTES' })
   },
   methods: {
@@ -76,7 +74,6 @@ export default {
       return this.$store.state.NotebookStore.isListLoading
     },
     activeNotebookId () {
-      // return (this.$store.state.NotebookStore.notebook && this.$store.state.NotebookStore.notebook.id) || 0
       return this.$store.state.TabManagerStore.currentTab && this.$store.state.TabManagerStore.currentTab.id
     },
     notebooks () {

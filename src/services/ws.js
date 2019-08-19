@@ -107,6 +107,10 @@ export default {
         // interpreter list
         case 'CONFIGURATIONS_INFO':
           break
+        // activity list
+        case 'LIST_NOTE_JOBS':
+          app.$store.dispatch('saveActivityList', data)
+          break
       }
     }
     ws.onerror = (e) => {

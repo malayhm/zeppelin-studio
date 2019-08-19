@@ -92,10 +92,13 @@ export default {
       filteredNotebook.paragraphs = paragraphs
     },
     mutateParagraphs (state, data) {
-      let id = data.paragraph.id
-      let index = state.paragraphs.map(function (p) { return p.id }).indexOf(id)
+      let filteredNotebook = state.notebooks.find(n => n.id === data.notebookId)
+      let paragraphs = filteredNotebook && filteredNotebook.paragraphs
 
-      let paragraph = state.paragraphs[index]
+      let id = data.paragraph.id
+      let index = paragraphs.map(function (p) { return p.id }).indexOf(id)
+
+      let paragraph = paragraphs[index]
 
       // if paragraph do not exist
       // it means it was not added from this context
@@ -103,10 +106,7 @@ export default {
       // is adding paragraph
 
       if (!paragraph && data.index) {
-        // let paragraphs = state.paragraphs
-        // paragraphs.splice(data.index, 0, data.paragraph)
-        // state.paragraphs = paragraphs
-        Vue.set(state.paragraphs, data.index, data.paragraph)
+        Vue.set(filteredNotebook.paragraphs, data.index, data.paragraph)
         return
       }
 
@@ -135,7 +135,8 @@ export default {
     },
     setParagraphOutput (state, data) {
       let paraId = data.paragraphId
-      let paragraph = state.paragraphs.find(p => p.id === paraId)
+      let filteredNotebook = state.notebooks.find(n => n.id === data.notebookId)
+      let paragraph = filteredNotebook.paragraphs.find(p => p.id === paraId)
       // let paraIndex = state.paragraphs.map(function (p) { return p.id }).indexOf(paraId)
 
       if (paragraph.results) {

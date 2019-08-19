@@ -1,20 +1,21 @@
 import Vue from 'vue'
+
 import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import BootstrapVue from 'bootstrap-vue'
+import Antd from 'ant-design-vue'
 
 // import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
 import VueSplit from 'vue-split-panel'
 import VueOffline from 'vue-offline'
 
+import 'ant-design-vue/dist/antd.css'
+
 window.$ = window.jQuery = require('jquery')
 
-require('bootstrap')
-
-Vue.use(BootstrapVue)
+Vue.use(Antd)
 
 Vue.config.productionTip = false
 

@@ -11,10 +11,10 @@
       </div>
 
       <div
-        v-if="this.$store.state.selectedLeftNavTab === 'interpreters'"
-        class="interpreters-content"
+        v-if="this.$store.state.selectedLeftNavTab === 'activity'"
+        class="activity-content"
       >
-        <InterpreterList />
+        <ActivityConsole />
       </div>
 
       <div
@@ -23,25 +23,6 @@
       >
         <PackageList />
       </div>
-
-      <div
-        v-if="this.$store.state.selectedLeftNavTab === 'repositories'"
-        class="repositories-content"
-      >
-      </div>
-
-      <div
-        v-if="this.$store.state.selectedLeftNavTab === 'processing'"
-        class="processing-content"
-      >
-      </div>
-
-      <div
-        v-if="this.$store.state.selectedLeftNavTab === 'tablist'"
-        class="tablist-content"
-      >
-        <TabList />
-      </div>
     </div>
   </div>
 </template>
@@ -49,18 +30,16 @@
 <script>
 import LeftNavBar from './LeftNavBar.vue'
 import NotebookList from '@/components/Notebook/NotebookList.vue'
-import InterpreterList from '@/components/Interpreter/InterpreterList.vue'
+import ActivityConsole from '@/components/ActivityConsole.vue'
 import PackageList from '@/components/Helium/PackageList.vue'
-import TabList from '@/components/Tabs/TabList.vue'
 
 export default {
   name: 'LeftSideBar',
   components: {
     LeftNavBar,
     NotebookList,
-    InterpreterList,
-    PackageList,
-    TabList
+    ActivityConsole,
+    PackageList
   }
 }
 </script>

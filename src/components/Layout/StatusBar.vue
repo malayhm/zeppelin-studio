@@ -1,50 +1,61 @@
 <template>
   <div class="status-bar">
+    <div class="status-left">
+    </div>
+
     <div class="status-right">
       <div
         id="toggle-dark-mode"
-        v-b-tooltip="{ title: 'Toggle Dark Mode', placement: 'top', container: 'body' }"
+        class="status-bar-widget"
       >
-        <a
-          href="javascript: void(0);"
-          @click="toggleDarkMode()"
-        >
-          <toggle-left-icon size="1x" v-if="darkModeEnabled"/>
-          <toggle-right-icon size="1x" v-else/>
-        </a>
+        <a-tooltip placement="top">
+          <template slot="title">
+            <span>Toggle Dark Mode</span>
+          </template>
+          <a-switch
+            defaultChecked
+            @change='toggleDarkMode'
+            size="small"
+          />
+        </a-tooltip>
       </div>
 
       <div
         id="connection-status"
-        v-b-tooltip="{ title: 'Server Connectivity', placement: 'top', container: 'body' }"
+        class="status-bar-widget"
       >
-        <div
-          class="ConnectionIndicator"
-          :class="'ConnectionIndicator--' + connectivityStatus"
-        >
-          <div class="Status">
-            <div class="Status__circle Status__circle--static"></div>
-            <div class="Status__circle Status__circle--animated Status__circle--pulse"></div>
-          </div>
+        <a-tooltip placement="top">
+          <template slot="title">
+            <span>Server Connectivity</span>
+          </template>
           <div
-            class="status-label"
+            class="ConnectionIndicator"
+            :class="'ConnectionIndicator--' + connectivityStatus"
           >
-            {{ connectivityStatus.replace('trying', 'trying to connect') }}
+            <div class="Status">
+              <div class="Status__circle Status__circle--static"></div>
+              <div class="Status__circle Status__circle--animated Status__circle--pulse"></div>
+            </div>
+            <div
+              class="status-label"
+            >
+              {{ connectivityStatus.replace('trying', 'trying to connect') }}
+            </div>
           </div>
-        </div>
+        </a-tooltip>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { ToggleLeftIcon, ToggleRightIcon } from 'vue-feather-icons'
-
 export default {
   name: 'StatusBar',
+  data: () => ({
+
+  }),
   components: {
-    'toggle-left-icon': ToggleLeftIcon,
-    'toggle-right-icon': ToggleRightIcon
+
   },
   computed: {
     darkModeEnabled () {
@@ -72,31 +83,36 @@ export default {
   background: #ececec;
   position: relative;
 
+  .status-left {
+    display: flex;
+    float: left;
+    margin-left: 48px;
+  }
+
   .status-right {
     display: flex;
     float: right;
   }
 }
 
-#connection-status {
-  padding: 0 8px;
+.status-bar-widget {
+  // padding: 0 8px;
 
-  &:hover {
-    background-color: #c5c5c5;
+  .status-pane-label {
+    margin-left: 10px;
   }
-}
-
-#toggle-dark-mode {
-  padding: 0 8px;
 
   &:hover {
     background-color: #c5c5c5;
   }
 
   a {
-    svg {
-      transition: transform .3s ease
-    }
+    padding: 0 8px;
+  }
+
+  button {
+    margin: 0 8px;
   }
 }
+
 </style>

@@ -17,7 +17,7 @@ export default {
   components: {
 
   },
-  props: ['paragraph'],
+  props: ['paragraph', 'notebookId'],
   data () {
     return {
       showEditor: false
@@ -41,6 +41,7 @@ export default {
 
       // save to local store
       this.$store.dispatch('setParagraph', {
+        notebookId: this.$props.notebookId,
         paragraph: paragraph
       })
 

@@ -34,6 +34,25 @@ export default {
         }).then(function (result) {
           context.commit('mutateInterpreters', result.body)
         })
+    },
+    restartInterpreter (context, data) {
+      // PUT
+      // http://localhost:8080/api/interpreter/setting/restart/<<key>>
+      // message: ""
+      // status: "OK"
+      // body
+    },
+    createInterpreter (context, data) {
+      // POST
+      // http://localhost:8080/api/interpreter/setting
+      // message: ""
+      // status: "OK"
+      // body
+    },
+    removeInterpreter (context, data) {
+      // DELETE
+      // http://localhost:8080/api/interpreter/setting/<<key>>
+      // status: "OK"
     }
   }
 }

@@ -27,7 +27,7 @@
           @click="closeTab(tab)"
           title="Close"
         >
-          <x-icon size="1x" />
+          <a-icon type="close" size="small" />
         </a>
       </li>
     </ul>
@@ -39,12 +39,11 @@
 </template>
 
 <script>
-import { XIcon } from 'vue-feather-icons'
 
 export default {
   name: 'tabManager',
   components: {
-    'x-icon': XIcon
+
   },
   data: () => ({
     activeTabIndex: 0,

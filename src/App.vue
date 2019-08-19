@@ -20,7 +20,6 @@
 
 <script>
 import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import Header from '@/components/Layout/Header.vue'
 import LeftSidebar from '@/components/Layout/LeftSideBar.vue'

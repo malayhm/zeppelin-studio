@@ -17,7 +17,7 @@
           :class="{'active':  tab.id === activeNotebookId}"
           v-on:click="openNotebook(tab)"
         >
-          <file-icon size="1.2x" />
+          <a-icon type="file" />
           {{ getFileName(tab.path) }}
         </a>
       </li>
@@ -26,12 +26,11 @@
 </template>
 
 <script>
-import { FileIcon } from 'vue-feather-icons'
 
 export default {
   name: 'StatusBar',
   components: {
-    'file-icon': FileIcon
+
   },
   created () {
 

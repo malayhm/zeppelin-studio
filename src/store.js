@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import 'es6-promise/auto'
 
+import api from '@/services/api.js'
+
 import TabManagerStore from '@/stores/tab_manager_store'
 import NotebookStore from '@/stores/notebook_store'
 import InterpreterStore from '@/stores/interpreter_store'
@@ -21,7 +23,14 @@ const store = new Vuex.Store({
     selectedLeftNavTab: 'folders',
     showPrefererences: false,
     darkMode: false,
-    webSocketStatus: 'disconnected'
+    webSocketStatus: 'disconnected',
+
+    configurations: null,
+
+    notebookRepos: [],
+
+    isActivityLoading: true,
+    activities: []
   },
 
   mutations: {
@@ -36,6 +45,19 @@ const store = new Vuex.Store({
     },
     updateWebSocketStatus (state, newStatus) {
       state.webSocketStatus = newStatus
+    },
+
+    saveConfiguration (state, data) {
+      state.configurations = data
+    },
+
+    saveNotebookRepos (state, data) {
+      state.notebookRepos = data
+    },
+
+    saveActivityList (state, data) {
+      state.isActivityLoading = false
+      state.activities = data
     }
   },
 
@@ -51,7 +73,59 @@ const store = new Vuex.Store({
     },
     updateWebSocketStatus (context, newStatus) {
       context.commit('updateWebSocketStatus', newStatus)
+    },
+
+    saveActivityList (context, data) {
+      context.commit('saveActivityList', data.noteJobs.jobs)
+    },
+
+    getConfiguration (context) {
+      return fetch(api.getRestApiBase() + '/configurations/all', {
+        method: 'GET',
+        credentials: 'same-origin'
+      })
+        .then(function (response) {
+          if (!response.ok) {
+            if (response.error) {
+              throw Error(response.error.error_message)
+            } else {
+              throw Error(response.statusText)
+            }
+          }
+
+          return response.json()
+        }).then(function (result) {
+          context.commit('saveConfiguration', result.body)
+        })
+    },
+
+    getNotebookRepos (context) {
+      return fetch(api.getRestApiBase() + '/notebook-repositories', {
+        method: 'GET',
+        credentials: 'same-origin'
+      })
+        .then(function (response) {
+          if (!response.ok) {
+            if (response.error) {
+              throw Error(response.error.error_message)
+            } else {
+              throw Error(response.statusText)
+            }
+          }
+
+          return response.json()
+        }).then(function (result) {
+          context.commit('saveNotebookRepos', result.body)
+        })
+    },
+
+    updateNotebookRepos (context, data) {
+      return fetch(api.getRestApiBase() + '/notebook-repositories', {
+        method: 'PUT',
+        credentials: 'same-origin'
+      })
     }
+
   }
 })
 
