@@ -10,14 +10,20 @@
                 @click="createNote()"
                 href="javascript:void(0)"
               >
-                New Notebooks
+                New notebook
               </a>
             </li>
 
             <li class="separator"></li>
 
             <li class="icon save">
-              <a href="#">Save<span>Ctrl+S</span></a>
+              <a href="#">
+                Save <!--<span>Ctrl+S</span> -->
+                </a>
+            </li>
+
+            <li class="icon save">
+              <a href="#">Manage permissions</a>
             </li>
 
             <li class="separator"></li>
@@ -28,11 +34,14 @@
             <li>
               <a href="#">Explort</a>
             </li>
+            <li class="icon save">
+              <a href="#">Move to recycle bin</a>
+            </li>
 
             <li class="separator"></li>
 
             <li class="icon print">
-              <a href="#">Print<span>Ctrl+P</span></a>
+              <a href="#">Print</a>
             </li>
           </ul>
         </li>
@@ -45,16 +54,15 @@
                 @click="toggle('code')"
                 href="javascript:void(0)"
               >
-                Toggle Code
+                Show/hide code
               </a>
             </li>
-            <li class="separator"></li>
             <li>
               <a
                 @click="toggle('lines')"
                 href="javascript:void(0)"
               >
-                Toggle Line Numbers
+                Show/hide line numbers
               </a>
             </li>
             <li>
@@ -62,15 +70,24 @@
                 @click="toggle('output')"
                 href="javascript:void(0)"
               >
-                Toggle Output
+                Show/hide outputs
               </a>
             </li>
+            <li class="separator"></li>
+            <li>
+              <a
+                href="javascript:void(0)"
+              >
+                Find and replace...
+              </a>
+            </li>
+            <li class="separator"></li>
             <li>
               <a
                 @click="clearOutput()"
                 href="javascript:void(0)"
               >
-                Clear All Output
+                Clear all outputs
               </a>
             </li>
           </ul>
@@ -80,7 +97,25 @@
         <li> View
           <ul>
             <li>
-
+              <a
+                href="javascript:void(0)"
+              >
+                Table of contents
+              </a>
+            </li>
+            <li>
+              <a
+                href="javascript:void(0)"
+              >
+                Version control
+              </a>
+            </li>
+            <li>
+              <a
+                href="javascript:void(0)"
+              >
+                Notebook info
+              </a>
             </li>
           </ul>
         </li>
@@ -89,8 +124,34 @@
         <li> Runtime
           <ul>
             <li>
-              <router-link to="#">Run All</router-link>
+              <a
+                href="javascript:void(0)"
+              >
+                Run all
+              </a>
             </li>
+            <li>
+              <a
+                href="javascript:void(0)"
+              >
+                Run before
+              </a>
+            </li>
+            <li>
+              <a
+                href="javascript:void(0)"
+              >
+                Run the focused paragraph
+              </a>
+            </li>
+            <li>
+              <a
+                href="javascript:void(0)"
+              >
+                Run all
+              </a>
+            </li>
+            <li class="separator"></li>
             <li>
               <a
                 href="javascript:void(0)"
@@ -108,7 +169,7 @@
               <a
                 href="javascript:void(0)"
               >
-                Notebook Repository
+                Notebook repository
               </a>
             </li>
             <li>
@@ -140,7 +201,7 @@
               </a>
             </li>
             <li>
-              <router-link to="#">Keyboard Shortcuts</router-link>
+              <router-link to="#">Keyboard shortcuts</router-link>
             </li>
           </ul>
         </li>
@@ -153,7 +214,7 @@
                 href="http://zeppelin.apache.org/community.html"
                 target="_blank"
               >
-                Mailing List
+                Mailing list
               </a>
             </li>
             <li>
