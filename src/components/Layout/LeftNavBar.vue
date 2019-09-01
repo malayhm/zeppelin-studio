@@ -49,6 +49,22 @@
           </a-tooltip>
         </a>
       </li>
+
+      <li>
+          <a
+            :class="{'active': this.$store.state.selectedLeftNavTab === 'trash'}"
+            href="javascript:void(0);"
+            data-ref="trash"
+            @click="selectTab('trash')"
+          >
+            <a-tooltip placement="right">
+              <template slot="title">
+                <span>Recycle Bin</span>
+              </template>
+              <a-icon type="delete" />
+            </a-tooltip>
+          </a>
+        </li>
     </ul>
 
     <div id="nav-actions">

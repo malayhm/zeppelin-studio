@@ -23,6 +23,13 @@
       >
         <PackageList />
       </div>
+
+      <div
+        v-if="this.$store.state.selectedLeftNavTab === 'trash'"
+        class="trash-content"
+      >
+
+      </div>
     </div>
   </div>
 </template>
