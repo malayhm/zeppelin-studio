@@ -13,35 +13,61 @@
                 New Notebook
               </a>
             </li>
+            <li>
+              <a
+                href="javascript:void(0)"
+              >
+                Import
+              </a>
+            </li>
 
             <li class="separator"></li>
 
-            <li class="icon save">
-              <a href="#">
+            <li>
+              <a
+                class="disabled"
+                href="javascript:void(0)"
+              >
                 Save <!--<span>Ctrl+S</span> -->
-                </a>
+              </a>
             </li>
 
-            <li class="icon save">
-              <a href="#">Manage Permissions</a>
+            <li>
+              <a
+                class="disabled"
+                href="javascript:void(0)"
+              >
+                Manage Permissions
+              </a>
+            </li>
+
+            <li class="separator"></li>
+            <li>
+              <a
+                class="disabled"
+                href="javascript:void(0)"
+              >
+                Explort
+              </a>
+            </li>
+            <li>
+              <a
+                class="disabled"
+                href="javascript:void(0)"
+              >
+                Move To Recycle Bin
+              </a>
             </li>
 
             <li class="separator"></li>
 
             <li>
-              <a href="#">Import</a>
-            </li>
-            <li>
-              <a href="#">Explort</a>
-            </li>
-            <li class="icon save">
-              <a href="#">Move To Recycle Bin</a>
-            </li>
-
-            <li class="separator"></li>
-
-            <li class="icon print">
-              <a href="#">Print</a>
+              <a
+                class="disabled"
+                href="javascript:void(0)"
+              >
+                Print
+              </a>
             </li>
           </ul>
         </li>
@@ -52,6 +78,7 @@
             <li>
               <a
                 @click="toggle('code')"
+                class="disabled"
                 href="javascript:void(0)"
               >
                 Show/Hide Code
@@ -60,6 +87,7 @@
             <li>
               <a
                 @click="toggle('lines')"
+                class="disabled"
                 href="javascript:void(0)"
               >
                 Show/Hide Line Numbers
@@ -68,6 +96,7 @@
             <li>
               <a
                 @click="toggle('output')"
+                class="disabled"
                 href="javascript:void(0)"
               >
                 Show/Hide Outputs
@@ -76,6 +105,7 @@
             <li class="separator"></li>
             <li>
               <a
+                class="disabled"
                 href="javascript:void(0)"
               >
                 Find And Replace...
@@ -85,6 +115,7 @@
             <li>
               <a
                 @click="clearOutput()"
+                class="disabled"
                 href="javascript:void(0)"
               >
                 Clear All Outputs
@@ -98,6 +129,7 @@
           <ul>
             <li>
               <a
+                class="disabled"
                 href="javascript:void(0)"
               >
                 Table Of Contents
@@ -105,6 +137,7 @@
             </li>
             <li>
               <a
+                class="disabled"
                 href="javascript:void(0)"
               >
                 Version Control
@@ -112,6 +145,7 @@
             </li>
             <li>
               <a
+                class="disabled"
                 href="javascript:void(0)"
               >
                 Notebook Info
@@ -125,6 +159,7 @@
           <ul>
             <li>
               <a
+                class="disabled"
                 href="javascript:void(0)"
               >
                 Run All
@@ -132,6 +167,7 @@
             </li>
             <li>
               <a
+                class="disabled"
                 href="javascript:void(0)"
               >
                 Run Before
@@ -139,6 +175,7 @@
             </li>
             <li>
               <a
+                class="disabled"
                 href="javascript:void(0)"
               >
                 Run The Focused Paragraph
@@ -146,6 +183,7 @@
             </li>
             <li>
               <a
+                class="disabled"
                 href="javascript:void(0)"
               >
                 Run After
