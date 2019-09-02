@@ -10,7 +10,7 @@
                 @click="createNote()"
                 href="javascript:void(0)"
               >
-                New notebook
+                New Notebook
               </a>
             </li>
 
@@ -23,7 +23,7 @@
             </li>
 
             <li class="icon save">
-              <a href="#">Manage permissions</a>
+              <a href="#">Manage Permissions</a>
             </li>
 
             <li class="separator"></li>
@@ -35,7 +35,7 @@
               <a href="#">Explort</a>
             </li>
             <li class="icon save">
-              <a href="#">Move to recycle bin</a>
+              <a href="#">Move To Recycle Bin</a>
             </li>
 
             <li class="separator"></li>
@@ -54,7 +54,7 @@
                 @click="toggle('code')"
                 href="javascript:void(0)"
               >
-                Show/hide code
+                Show/Hide Code
               </a>
             </li>
             <li>
@@ -62,7 +62,7 @@
                 @click="toggle('lines')"
                 href="javascript:void(0)"
               >
-                Show/hide line numbers
+                Show/Hide Line Numbers
               </a>
             </li>
             <li>
@@ -70,7 +70,7 @@
                 @click="toggle('output')"
                 href="javascript:void(0)"
               >
-                Show/hide outputs
+                Show/Hide Outputs
               </a>
             </li>
             <li class="separator"></li>
@@ -78,7 +78,7 @@
               <a
                 href="javascript:void(0)"
               >
-                Find and replace...
+                Find And Replace...
               </a>
             </li>
             <li class="separator"></li>
@@ -87,7 +87,7 @@
                 @click="clearOutput()"
                 href="javascript:void(0)"
               >
-                Clear all outputs
+                Clear All Outputs
               </a>
             </li>
           </ul>
@@ -100,21 +100,21 @@
               <a
                 href="javascript:void(0)"
               >
-                Table of contents
+                Table Of Contents
               </a>
             </li>
             <li>
               <a
                 href="javascript:void(0)"
               >
-                Version control
+                Version Control
               </a>
             </li>
             <li>
               <a
                 href="javascript:void(0)"
               >
-                Notebook info
+                Notebook Info
               </a>
             </li>
           </ul>
@@ -127,28 +127,28 @@
               <a
                 href="javascript:void(0)"
               >
-                Run all
+                Run All
               </a>
             </li>
             <li>
               <a
                 href="javascript:void(0)"
               >
-                Run before
+                Run Before
               </a>
             </li>
             <li>
               <a
                 href="javascript:void(0)"
               >
-                Run the focused paragraph
+                Run The Focused Paragraph
               </a>
             </li>
             <li>
               <a
                 href="javascript:void(0)"
               >
-                Run all
+                Run After
               </a>
             </li>
             <li class="separator"></li>
@@ -169,7 +169,7 @@
               <a
                 href="javascript:void(0)"
               >
-                Notebook repository
+                Notebook Repository
               </a>
             </li>
             <li>
@@ -193,6 +193,25 @@
         <li> Tools
           <ul>
             <li>
+              Switch Theme
+              <ul>
+                <li>
+                  <a
+                    href="javascript: void(0);"
+                  >
+                    Light
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="javascript: void(0);"
+                  >
+                    Dark
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
               <a
                 href="javascript: void(0);"
                 @click="showPreferences()"
@@ -201,7 +220,11 @@
               </a>
             </li>
             <li>
-              <router-link to="#">Keyboard shortcuts</router-link>
+              <a
+                href="javascript: void(0);"
+              >
+                Keyboard Shortcuts
+              </a>
             </li>
           </ul>
         </li>

@@ -15,10 +15,14 @@
     <div
       v-else
       class="notebook">
-      <NotebookControls />
+      <div
+        class="nb-controls-container"
+      >
+        <NotebookControls />
+      </div>
 
       <div
-        class="paragraph-container"
+        class="paragraph-container scrollbar"
       >
         <Paragraph
           :setActive="setActive"
@@ -92,10 +96,25 @@ export default {
 </script>
 
 <style scoped>
+.notebook {
+  position: relative;
+  height: 100%;
+}
+
+.nb-controls-container {
+  position: absolute;
+  width: 100%;
+}
+
 .paragraph-container {
   padding: 15px;
   background: #FFF;
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(255, 255, 255, 0.12), 0 2px 4px -1px rgba(255, 255, 255, 0.4);
   height: 100%;
+
+  height: calc(100% - 30px);
+  overflow: auto;
+  position: relative;
+  top: 30px;
 }
 </style>

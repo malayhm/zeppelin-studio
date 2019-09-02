@@ -6,6 +6,17 @@
       >
         <a-tooltip placement="top">
           <template slot="title">
+            <span>Run all paragraphs</span>
+          </template>
+          <a-icon type="play-circle" />
+        </a-tooltip>
+      </a>
+
+      <a
+        href="javascript: void(0);"
+      >
+        <a-tooltip placement="top">
+          <template slot="title">
             <span>Save</span>
           </template>
           <a-icon type="save" />
@@ -17,20 +28,9 @@
       >
         <a-tooltip placement="top">
           <template slot="title">
-            <span>Clone this Notebook</span>
+            <span>Clone this notebook</span>
           </template>
           <a-icon type="copy" />
-        </a-tooltip>
-      </a>
-
-      <a
-        href="javascript: void(0);"
-      >
-        <a-tooltip placement="top">
-          <template slot="title">
-            <span>Run all paragraphs</span>
-          </template>
-          <a-icon type="play-circle" />
         </a-tooltip>
       </a>
 
@@ -48,22 +48,13 @@
       <a
         href="javascript: void(0);"
       >
+        <!-- MOVE_NOTE_TO_TRASH -->
+        <!-- DEL_NOTE -->
         <a-tooltip placement="top">
           <template slot="title">
             <span>Delete</span>
           </template>
           <a-icon type="delete" />
-        </a-tooltip>
-      </a>
-
-      <a
-        href="javascript: void(0);"
-      >
-        <a-tooltip placement="top">
-          <template slot="title">
-            <span>Search code</span>
-          </template>
-          <a-icon type="file-search" />
         </a-tooltip>
       </a>
     </div>
@@ -74,12 +65,23 @@
       >
         <a-tooltip placement="top">
           <template slot="title">
+            <span>Search Code</span>
+          </template>
+          <a-icon type="file-search" />
+        </a-tooltip>
+      </a>
+
+      <a
+        href="javascript: void(0);"
+      >
+        <a-tooltip placement="top">
+          <template slot="title">
             <span>Version Control</span>
           </template>
           <a-icon type="diff" />
         </a-tooltip>
       </a>
-      
+
       <a
         href="javascript: void(0);"
       >
@@ -90,7 +92,7 @@
           <a-icon type="reload" />
         </a-tooltip>
       </a>
-      
+
       <a-dropdown :trigger="['click']">
         <a class="ant-dropdown-link" href="#">
           <span> Default </span>
