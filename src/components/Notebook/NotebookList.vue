@@ -14,6 +14,23 @@
       </div>
     </div>
 
+    <!-- <a-directory-tree
+      multiple
+      defaultExpandAll
+      @select="onSelect"
+    >
+      <a-tree-node title="parent 0" key="0-0">
+        <a-tree-node title="leaf 0-0" key="0-0-0" isLeaf />
+        <a-tree-node title="leaf 0-1" key="0-0-1" >
+          <a-tree-node title="leaf 0-1" key="0-0-2" isLeaf />
+        </a-tree-node>
+      </a-tree-node>
+      <a-tree-node title="parent 1" key="0-1">
+        <a-tree-node title="leaf 1-0" key="0-1-0" isLeaf />
+        <a-tree-node title="leaf 1-1" key="0-1-1" isLeaf />
+      </a-tree-node>
+    </a-directory-tree> -->
+
     <ul>
       <li
         v-for="(note, index) in this.notebooks"
@@ -46,7 +63,8 @@
 </template>
 
 <script>
-import ws from '@/services/ws'
+import ws from '@/services/wsHelper'
+import wsFactory from '@/services/wsFactory'
 
 export default {
   name: 'StatusBar',
@@ -57,17 +75,7 @@ export default {
 
   },
   mounted () {
-    ws.send({ op: 'LIST_NOTES' })
-  },
-  methods: {
-    openNotebook (note) {
-      note.name = this.getFileName(note.path)
-      note.type = 'notebook'
-      this.$store.dispatch('addTab', note)
-    },
-    getFileName (path) {
-      return path.substr(path.lastIndexOf('/') + 1)
-    }
+    ws.getConn().send({ op: 'LIST_NOTES' })
   },
   computed: {
     isLoading () {
@@ -78,6 +86,28 @@ export default {
     },
     notebooks () {
       return this.$store.state.NotebookStore.notebooks
+    }
+    // notebookTree () {
+    //   let notebooks = this.$store.state.NotebookStore.notebooks
+    //   let tree = []
+    //   notebooks.forEach(n => {
+
+    //   })
+    // }
+  },
+  methods: {
+    openNotebook (note) {
+      wsFactory.initNotebookConnection(note.id, this.$store)
+
+      note.name = this.getFileName(note.path)
+      note.type = 'notebook'
+      this.$store.dispatch('addTab', note)
+    },
+    getFileName (path) {
+      return path.substr(path.lastIndexOf('/') + 1)
+    },
+    onSelect (keys) {
+      console.log('Trigger Select', keys)
     }
   }
 }

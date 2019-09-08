@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import wsFactory from '@/services/wsFactory'
 
 export default {
   name: 'tabManager',
@@ -68,6 +69,8 @@ export default {
       this.$store.dispatch('setActiveTab', tab)
     },
     closeTab (tab) {
+      wsFactory.closeConn(tab.id)
+
       this.$store.dispatch('removeTab', tab)
     }
   }

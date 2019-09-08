@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import ws from '@/services/ws'
+import wsFactory from '@/services/wsFactory'
 
 import NotebookControls from './Controls.vue'
 import Paragraph from './paragraphs/Paragraph.vue'
@@ -84,7 +84,7 @@ export default {
       this.$store.dispatch('setActiveParagraph', paragraph)
     },
     fetchNote () {
-      ws.send({
+      wsFactory.getConn(this.notebook.id).send({
         op: 'GET_NOTE',
         data: {
           id: this.note.id

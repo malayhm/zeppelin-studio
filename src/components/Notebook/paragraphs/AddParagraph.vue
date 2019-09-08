@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import ws from '@/services/ws'
+import wsFactory from '@/services/wsFactory.js'
 import uuidvtimestamp from 'uuid/v1'
 
 export default {
@@ -41,7 +41,7 @@ export default {
       })
 
       // for api
-      ws.send({
+      wsFactory.getConn(this.$props.notebookId).send({
         op: 'INSERT_PARAGRAPH',
         data: {
           index: index + 1,

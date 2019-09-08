@@ -26,12 +26,12 @@ import LeftSidebar from '@/components/Layout/LeftSideBar.vue'
 import StatusBar from '@/components/Layout/StatusBar.vue'
 import Preferences from '@/components/Tools/Preferences.vue'
 
-import ws from '@/services/ws'
+import ws from '@/services/wsHelper'
 
 export default {
   name: 'App',
   components: { Header, LeftSidebar, StatusBar, Preferences },
-  mounted () {
+  created () {
     document.title = 'Zeppelin Studio'
 
     ws.init(this)

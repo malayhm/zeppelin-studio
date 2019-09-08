@@ -57,7 +57,7 @@
 
 <script>
 // import _ from 'underscore'
-import ws from '@/services/ws'
+import wsFactory from '@/services/wsFactory.js'
 import marked from 'marked'
 import MDEditor from './MDEditor.vue'
 
@@ -215,7 +215,7 @@ export default {
         paragraphText = '%md\n' + this.mdValue
       }
 
-      ws.send({
+      wsFactory.getConn(this.$props.notebookId).send({
         op: 'RUN_PARAGRAPH',
         data: {
           id: id,
@@ -234,7 +234,7 @@ export default {
         id: id
       })
 
-      ws.send({
+      wsFactory.getConn(this.$props.notebookId).send({
         op: 'PARAGRAPH_REMOVE',
         data: {
           id: id

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import ws from '@/services/ws.js'
+import wsFactory from '@/services/wsFactory.js'
 
 export default {
   name: 'mini-paragraph',
@@ -46,7 +46,7 @@ export default {
       })
 
       // save to api
-      ws.send({
+      wsFactory.getConn(this.$props.notebookId).send({
         op: 'COMMIT_PARAGRAPH',
         data: {
           id: id,

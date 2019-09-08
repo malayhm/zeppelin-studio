@@ -20,6 +20,8 @@ const store = new Vuex.Store({
   },
 
   state: {
+    ticket: null,
+
     selectedLeftNavTab: 'folders',
     showPrefererences: false,
     darkMode: false,
@@ -34,6 +36,9 @@ const store = new Vuex.Store({
   },
 
   mutations: {
+    mutateTicketData (state, data) {
+      state.ticket = data
+    },
     mutateSelectedTab (state, data) {
       state.selectedLeftNavTab = data
     },
@@ -62,6 +67,9 @@ const store = new Vuex.Store({
   },
 
   actions: {
+    updateTicketDate (context, data) {
+      context.commit('mutateTicketData', data)
+    },
     selectLeftNavTab (context, data) {
       context.commit('mutateSelectedTab', data)
     },

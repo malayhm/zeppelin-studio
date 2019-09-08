@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import ws from '@/services/ws'
+import ws from '@/services/wsHelper'
 
 export default {
   name: 'ActivityConsole',
@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     getActivities () {
-      ws.send({ op: 'LIST_NOTE_JOBS' })
+      ws.getConn().send({ op: 'LIST_NOTE_JOBS' })
     }
   }
 }
