@@ -36,6 +36,7 @@ export default {
       if (!isActiveNotebook) {
         return
       }
+      let notebook = store.state.TabManagerStore.currentTab
       // let noteId = store.state.TabManagerStore.currentTab.id
 
       switch (command) {
@@ -56,7 +57,7 @@ export default {
         case 'save':
           break
         case 'export-json':
-          notebookUtils.exportJSON()
+          notebookUtils.exportJSON(notebook)
           break
         case 'print':
           break

@@ -1,6 +1,8 @@
 
 export default {
-  exportJSON (exportObj, exportName) {
+  exportJSON (notebook) {
+    let exportObj = notebook
+    let exportName = notebook.id
     // Pending - check huge data size
     // check browser compatibility
     var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(exportObj))
