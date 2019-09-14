@@ -11,7 +11,10 @@
         :tabContent="currentTab"
       >
         <Notebook v-if="currentTab.type == 'notebook'" :note="currentTab" />
-
+        <Interpreter v-if="currentTab.type == 'interpreters'" />
+        <Configurations v-if="currentTab.type == 'configurations'" />
+        <Credentials v-if="currentTab.type == 'credentials'" />
+        <NotebookRepository v-if="currentTab.type == 'notebook-repository'" />
       </Tab>
     </TabManager>
 
@@ -27,6 +30,11 @@ import Tab from '@/components/Tabs/Tab.vue'
 
 import Home from '@/views/Home.vue'
 import Notebook from '@/components/Notebook/Notebook.vue'
+import Interpreter from '@/components/Interpreter/InterpreterList.vue'
+
+import Configurations from '@/components/Settings/Configurations.vue'
+import Credentials from '@/components/Settings/Credentials.vue'
+import NotebookRepository from '@/components/Settings/NotebookRepository.vue'
 
 import { mapState } from 'vuex'
 
@@ -36,7 +44,11 @@ export default {
     TabManager,
     Tab,
     Home,
-    Notebook
+    Notebook,
+    Interpreter,
+    Configurations,
+    Credentials,
+    NotebookRepository
   },
   computed: mapState({
     tabList: state => state.TabManagerStore.tabs

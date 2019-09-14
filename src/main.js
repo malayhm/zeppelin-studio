@@ -14,6 +14,8 @@ import VueOffline from 'vue-offline'
 import 'ant-design-vue/dist/antd.css'
 
 import api from '@/services/api.js'
+import { EventBus } from '@/services/event-bus'
+import commandManager from '@/services/command-manager'
 
 window.$ = window.jQuery = require('jquery')
 
@@ -46,6 +48,13 @@ Vue.use(VueOffline, {
           this.$on('offline', () => {
             alert('You are offline! The website will not work')
           })
+
+          commandManager.setupCommands(this.$store)
+        },
+        methods: {
+          executeCommand (type, command, arg) {
+            EventBus.$emit(type, command, arg)
+          }
         },
         router,
         store,

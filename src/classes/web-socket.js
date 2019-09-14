@@ -70,7 +70,7 @@ export default class WsConnection {
 
       this.timer = setInterval(() => {
         this.conn.sendNewEvent({ op: 'PING' })
-      }, 15000)
+      }, 30000)
     }
 
     this.ws.onmessage = (evt) => {

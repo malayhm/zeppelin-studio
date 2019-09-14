@@ -18,7 +18,7 @@
       <div
         class="nb-controls-container"
       >
-        <NotebookControls />
+        <NotebookControls :noteId="note.id" />
       </div>
 
       <div
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import wsFactory from '@/services/wsFactory'
+import wsFactory from '@/services/ws-factory'
 
 import NotebookControls from './Controls.vue'
 import Paragraph from './paragraphs/Paragraph.vue'

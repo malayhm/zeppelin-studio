@@ -3,6 +3,7 @@
     <div class="left-controls">
       <a
         href="javascript: void(0);"
+        @click="executeNotebookCommand('run-all')"
       >
         <a-tooltip placement="top">
           <template slot="title">
@@ -14,6 +15,7 @@
 
       <a
         href="javascript: void(0);"
+        @click="executeNotebookCommand('save')"
       >
         <a-tooltip placement="top">
           <template slot="title">
@@ -25,6 +27,7 @@
 
       <a
         href="javascript: void(0);"
+        @click="executeNotebookCommand('clone')"
       >
         <a-tooltip placement="top">
           <template slot="title">
@@ -36,6 +39,7 @@
 
       <a
         href="javascript: void(0);"
+        @click="executeNotebookCommand('export-json')"
       >
         <a-tooltip placement="top">
           <template slot="title">
@@ -47,6 +51,7 @@
 
       <a
         href="javascript: void(0);"
+        @click="executeNotebookCommand('delete-temporary')"
       >
         <!-- MOVE_NOTE_TO_TRASH -->
         <!-- DEL_NOTE -->
@@ -84,6 +89,7 @@
 
       <a
         href="javascript: void(0);"
+        @click="executeNotebookCommand('reload')"
       >
         <a-tooltip placement="top">
           <template slot="title">
@@ -117,6 +123,9 @@
 <script>
 export default {
   name: 'NotebookControls',
+  props: {
+    noteId: { required: true }
+  },
   components: {
 
   },
@@ -127,7 +136,9 @@ export default {
 
   },
   methods: {
-
+    executeNotebookCommand (command) {
+      this.$root.executeCommand('notebook', command)
+    }
   }
 }
 </script>

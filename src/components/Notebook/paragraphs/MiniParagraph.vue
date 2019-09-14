@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import wsFactory from '@/services/wsFactory.js'
+import wsFactory from '@/services/ws-factory.js'
 
 export default {
   name: 'mini-paragraph',

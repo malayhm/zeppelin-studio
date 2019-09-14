@@ -63,8 +63,8 @@
 </template>
 
 <script>
-import ws from '@/services/wsHelper'
-import wsFactory from '@/services/wsFactory'
+import ws from '@/services/ws-helper'
+import wsFactory from '@/services/ws-factory'
 
 export default {
   name: 'StatusBar',

@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import ws from '@/services/wsHelper'
+import ws from '@/services/ws-helper'
 
 export default {
   name: 'ActivityConsole',

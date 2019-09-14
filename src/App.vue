@@ -15,26 +15,42 @@
     </Split>
 
     <StatusBar />
+
+    <GlobalEvents
+      @keyup.ctrl.n="executeCommand('notebook', 'new')"
+      @keyup.ctrl.f="executeCommand('notebook', 'find-and-replace')"
+      @keyup.ctrl.r="executeCommand('notebook', 'run-all')"
+    />
   </div>
 </template>
 
 <script>
 import 'bootstrap/dist/css/bootstrap.css'
+import GlobalEvents from 'vue-global-events'
+
+import ws from '@/services/ws-helper'
 
 import Header from '@/components/Layout/Header.vue'
 import LeftSidebar from '@/components/Layout/LeftSideBar.vue'
 import StatusBar from '@/components/Layout/StatusBar.vue'
 import Preferences from '@/components/Tools/Preferences.vue'
 
-import ws from '@/services/wsHelper'
-
 export default {
   name: 'App',
-  components: { Header, LeftSidebar, StatusBar, Preferences },
+  components: { GlobalEvents, Header, LeftSidebar, StatusBar, Preferences },
   created () {
     document.title = 'Zeppelin Studio'
-
+  },
+  beforeMount () {
     ws.init(this)
+  },
+  mounted () {
+
+  },
+  methods: {
+    executeCommand (type, command, arg) {
+      this.$root.executeCommand(type, command, arg)
+    }
   }
 }
 </script>

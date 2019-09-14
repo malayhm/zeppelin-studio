@@ -57,7 +57,7 @@
 
 <script>
 // import _ from 'underscore'
-import wsFactory from '@/services/wsFactory.js'
+import wsFactory from '@/services/ws-factory.js'
 import marked from 'marked'
 import MDEditor from './MDEditor.vue'
 

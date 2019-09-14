@@ -7,14 +7,15 @@
           <ul>
             <li>
               <a
-                @click="createNote()"
+                @click="executeNotebookCommand('new')"
                 href="javascript:void(0)"
               >
-                New Notebook
+                New Notebook <span>Ctrl+N</span>
               </a>
             </li>
             <li>
               <a
+                @click="executeNotebookCommand('import-json')"
                 href="javascript:void(0)"
               >
                 Import
@@ -25,7 +26,8 @@
 
             <li>
               <a
-                class="disabled"
+                v-bind:class="{'disabled': !(isActiveNotebook)}"
+                @click="executeNotebookCommand('save')"
                 href="javascript:void(0)"
               >
                 Save <!--<span>Ctrl+S</span> -->
@@ -34,7 +36,8 @@
 
             <li>
               <a
-                class="disabled"
+                v-bind:class="{'disabled': !(isActiveNotebook)}"
+                @click="executeNotebookCommand('manage-permissions')"
                 href="javascript:void(0)"
               >
                 Manage Permissions
@@ -44,7 +47,8 @@
             <li class="separator"></li>
             <li>
               <a
-                class="disabled"
+                v-bind:class="{'disabled': !(isActiveNotebook)}"
+                @click="executeNotebookCommand('export-json')"
                 href="javascript:void(0)"
               >
                 Explort
@@ -52,7 +56,8 @@
             </li>
             <li>
               <a
-                class="disabled"
+                v-bind:class="{'disabled': !(isActiveNotebook)}"
+                @click="executeNotebookCommand('delete-temporary')"
                 href="javascript:void(0)"
               >
                 Move To Recycle Bin
@@ -63,7 +68,8 @@
 
             <li>
               <a
-                class="disabled"
+                v-bind:class="{'disabled': !(isActiveNotebook)}"
+                @click="executeNotebookCommand('print')"
                 href="javascript:void(0)"
               >
                 Print
@@ -77,8 +83,8 @@
           <ul>
             <li>
               <a
-                @click="toggle('code')"
-                class="disabled"
+                @click="executeNotebookCommand('toggle-code')"
+                v-bind:class="{'disabled': !(isActiveNotebook)}"
                 href="javascript:void(0)"
               >
                 Show/Hide Code
@@ -86,8 +92,8 @@
             </li>
             <li>
               <a
-                @click="toggle('lines')"
-                class="disabled"
+                @click="executeNotebookCommand('toggle-line-numbers')"
+                v-bind:class="{'disabled': !(isActiveNotebook)}"
                 href="javascript:void(0)"
               >
                 Show/Hide Line Numbers
@@ -95,8 +101,8 @@
             </li>
             <li>
               <a
-                @click="toggle('output')"
-                class="disabled"
+                @click="executeNotebookCommand('toggle-output')"
+                v-bind:class="{'disabled': !(isActiveNotebook)}"
                 href="javascript:void(0)"
               >
                 Show/Hide Outputs
@@ -105,7 +111,8 @@
             <li class="separator"></li>
             <li>
               <a
-                class="disabled"
+                v-bind:class="{'disabled': !(isActiveNotebook)}"
+                @click="executeNotebookCommand('find-and-replace')"
                 href="javascript:void(0)"
               >
                 Find And Replace...
@@ -114,8 +121,8 @@
             <li class="separator"></li>
             <li>
               <a
-                @click="clearOutput()"
-                class="disabled"
+                @click="executeNotebookCommand('clear-output')"
+                v-bind:class="{'disabled': !(isActiveNotebook)}"
                 href="javascript:void(0)"
               >
                 Clear All Outputs
@@ -129,7 +136,8 @@
           <ul>
             <li>
               <a
-                class="disabled"
+                v-bind:class="{'disabled': !(isActiveNotebook)}"
+                @click="executeNotebookCommand('show-toc')"
                 href="javascript:void(0)"
               >
                 Table Of Contents
@@ -137,7 +145,8 @@
             </li>
             <li>
               <a
-                class="disabled"
+                v-bind:class="{'disabled': !(isActiveNotebook)}"
+                @click="executeNotebookCommand('show-version-control')"
                 href="javascript:void(0)"
               >
                 Version Control
@@ -145,7 +154,8 @@
             </li>
             <li>
               <a
-                class="disabled"
+                v-bind:class="{'disabled': !(isActiveNotebook)}"
+                @click="executeNotebookCommand('show-notebook-info')"
                 href="javascript:void(0)"
               >
                 Notebook Info
@@ -159,7 +169,8 @@
           <ul>
             <li>
               <a
-                class="disabled"
+                v-bind:class="{'disabled': !(isActiveNotebook)}"
+                @click="executeNotebookCommand('run-all')"
                 href="javascript:void(0)"
               >
                 Run All
@@ -167,7 +178,8 @@
             </li>
             <li>
               <a
-                class="disabled"
+                v-bind:class="{'disabled': !(isActiveNotebook)}"
+                @click="executeNotebookCommand('run-before')"
                 href="javascript:void(0)"
               >
                 Run Before
@@ -175,7 +187,8 @@
             </li>
             <li>
               <a
-                class="disabled"
+                v-bind:class="{'disabled': !(isActiveNotebook)}"
+                @click="executeNotebookCommand('run-focused')"
                 href="javascript:void(0)"
               >
                 Run The Focused Paragraph
@@ -183,7 +196,8 @@
             </li>
             <li>
               <a
-                class="disabled"
+                v-bind:class="{'disabled': !(isActiveNotebook)}"
+                @click="executeNotebookCommand('run-after')"
                 href="javascript:void(0)"
               >
                 Run After
@@ -192,6 +206,7 @@
             <li class="separator"></li>
             <li>
               <a
+                @click="openTab('interpreters')"
                 href="javascript:void(0)"
               >
                 Interpreters
@@ -205,6 +220,7 @@
           <ul>
             <li>
               <a
+                @click="openTab('notebook-repository')"
                 href="javascript:void(0)"
               >
                 Notebook Repository
@@ -212,6 +228,7 @@
             </li>
             <li>
               <a
+                @click="openTab('credentials')"
                 href="javascript:void(0)"
               >
                 Credentials
@@ -219,6 +236,7 @@
             </li>
             <li>
               <a
+                @click="openTab('configurations')"
                 href="javascript:void(0)"
               >
                 Configuration
@@ -230,11 +248,15 @@
         <!-- Tools Menu -->
         <li> Tools
           <ul>
-            <li>
+            <li
+              v-bind:class="{'disabled': !(isActiveNotebook)}"
+              class="submenu"
+            >
               Switch Theme
               <ul>
                 <li>
                   <a
+                    @click="executeNotebookCommand('switch-theme-light')"
                     href="javascript: void(0);"
                   >
                     Light
@@ -242,6 +264,7 @@
                 </li>
                 <li>
                   <a
+                    @click="executeNotebookCommand('switch-theme-dark')"
                     href="javascript: void(0);"
                   >
                     Dark
@@ -259,6 +282,7 @@
             </li>
             <li>
               <a
+                @click="executeCommand('show-keyboard-shortcuts')"
                 href="javascript: void(0);"
               >
                 Keyboard Shortcuts
@@ -312,14 +336,34 @@
 
 <script>
 import jQueryMenu from '@/components/thirdparty/jquery.menu.js'
+
 export default {
   name: 'TopMenu',
+  data: () => ({
+  }),
+  computed: {
+    activeNotebook () {
+      return this.isActiveNotebook && this.$store.state.TabManagerStore.currentTab
+    },
+    isActiveNotebook () {
+      return (this.$store.state.TabManagerStore.currentTab &&
+          this.$store.state.TabManagerStore.currentTab.type === 'notebook')
+    }
+  },
   mounted () {
     jQueryMenu.init()
   },
   methods: {
     showPreferences () {
       this.$store.dispatch('togglePreferences', true)
+    },
+    openTab (tabName) {
+      this.$root.executeCommand('show-tab', tabName)
+    },
+    executeNotebookCommand (command) {
+      if (this.isActiveNotebook) {
+        this.$root.executeCommand('notebook', command)
+      }
     }
   }
 }

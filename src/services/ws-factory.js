@@ -1,4 +1,4 @@
-import WsConnection from '@/classes/webSocket.js'
+import WsConnection from '@/classes/web-socket.js'
 
 let wsConn = {}
 

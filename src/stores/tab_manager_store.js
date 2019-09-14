@@ -1,5 +1,3 @@
-import Vue from 'vue'
-
 export default {
   state: {
     tabs: [],
@@ -15,7 +13,7 @@ export default {
   },
   mutations: {
     addTab (state, data) {
-      let isExist = state.tabs.filter(t => t.path === data.path)
+      let isExist = state.tabs.filter(t => (t.path && t.path === data.path) || (!t.path && t.type === data.type))
       state.currentTab = data
       if (isExist.length === 0) {
         state.tabs.push(data)
