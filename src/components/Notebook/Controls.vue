@@ -51,7 +51,7 @@
 
       <a
         href="javascript: void(0);"
-        @click="executeNotebookCommand('delete-temporary')"
+        @click="showDeleteConfirm"
       >
         <!-- MOVE_NOTE_TO_TRASH -->
         <!-- DEL_NOTE -->
@@ -138,6 +138,19 @@ export default {
   methods: {
     executeNotebookCommand (command) {
       this.$root.executeCommand('notebook', command)
+    },
+    showDeleteConfirm () {
+      let that = this
+      this.$confirm({
+        title: 'Do you want to delete this Notebook?',
+        content: 'This will move the notebook to Recycle Bin and you can still recover it.',
+        onOk () {
+          that.executeNotebookCommand('delete-temporary')
+
+          that.$message.success('Notebook moved to recycle bin successfully.', 4)
+        },
+        onCancel () {}
+      })
     }
   }
 }

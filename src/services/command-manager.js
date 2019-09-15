@@ -3,6 +3,8 @@ import notebookUtils from '@/services/notebook-utils'
 
 export default {
   setupCommands (store) {
+    notebookUtils.setStore(store)
+
     this.setupTabCommands(store)
 
     this.setupNotebookCommands(store)
@@ -32,19 +34,19 @@ export default {
     EventBus.$on('notebook', (command) => {
       let isActiveNotebook = (store.state.TabManagerStore.currentTab &&
                               store.state.TabManagerStore.currentTab.type === 'notebook')
-      console.log('notebook ' + command)
+
       if (!isActiveNotebook) {
         return
       }
       let notebook = store.state.TabManagerStore.currentTab
-      // let noteId = store.state.TabManagerStore.currentTab.id
 
       switch (command) {
         case 'new':
           break
         case 'import-json':
           break
-        case 'clear-output': // PARAGRAPH_CLEAR_ALL_OUTPUT, notebookId
+        case 'clear-output':
+          notebookUtils.clearAllOutputs(notebook.id)
           break
         case 'run-all':
           break
@@ -62,6 +64,7 @@ export default {
         case 'print':
           break
         case 'delete-temporary':
+          notebookUtils.deleteTemporary(notebook.id)
           break
         case 'delete-permanently':
           break

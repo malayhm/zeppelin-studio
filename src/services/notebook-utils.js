@@ -1,5 +1,11 @@
+import wsHelper from '@/services/ws-helper'
+// import wsFactory from '@/services/ws-factory'
 
 export default {
+  setStore (store) {
+    this.store = store
+  },
+
   exportJSON (notebook) {
     let exportObj = notebook
     let exportName = notebook.id
@@ -12,5 +18,29 @@ export default {
     document.body.appendChild(downloadAnchorNode) // required for firefox
     downloadAnchorNode.click()
     downloadAnchorNode.remove()
+  },
+
+  clearAllOutputs (notebookId) {
+    wsHelper.getConn().send({
+      op: 'PARAGRAPH_CLEAR_ALL_OUTPUT',
+      data: {
+        id: notebookId
+      }
+    })
+  },
+
+  deleteTemporary (notebookId) {
+    wsHelper.getConn().send({
+      op: 'MOVE_NOTE_TO_TRASH',
+      data: {
+        id: notebookId
+      }
+    })
+
+    // Remove the tab
+    this.store.dispatch('removeTab', this.store.state.TabManagerStore.currentTab)
+
+    // Reload the notebook list
+    wsHelper.getConn().send({ op: 'LIST_NOTES' })
   }
 }
