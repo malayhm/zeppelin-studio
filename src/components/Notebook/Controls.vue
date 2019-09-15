@@ -53,8 +53,6 @@
         href="javascript: void(0);"
         @click="showDeleteConfirm"
       >
-        <!-- MOVE_NOTE_TO_TRASH -->
-        <!-- DEL_NOTE -->
         <a-tooltip placement="top">
           <template slot="title">
             <span>Delete</span>

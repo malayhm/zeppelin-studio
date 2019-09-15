@@ -1,16 +1,20 @@
 import wsHelper from '@/services/ws-helper'
-// import wsFactory from '@/services/ws-factory'
+import wsFactory from '@/services/ws-factory'
 
 export default {
   setStore (store) {
     this.store = store
   },
 
+  reloadList () {
+    wsHelper.getConn().send({ op: 'LIST_NOTES' })
+  },
+
   exportJSON (notebook) {
     let exportObj = notebook
     let exportName = notebook.id
     // Pending - check huge data size
-    // check browser compatibility
+    // Pending - check browser compatibility
     var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(exportObj))
     var downloadAnchorNode = document.createElement('a')
     downloadAnchorNode.setAttribute('href', dataStr)
@@ -21,7 +25,7 @@ export default {
   },
 
   clearAllOutputs (notebookId) {
-    wsHelper.getConn().send({
+    wsFactory.getConn(notebookId).send({
       op: 'PARAGRAPH_CLEAR_ALL_OUTPUT',
       data: {
         id: notebookId
@@ -41,6 +45,30 @@ export default {
     this.store.dispatch('removeTab', this.store.state.TabManagerStore.currentTab)
 
     // Reload the notebook list
-    wsHelper.getConn().send({ op: 'LIST_NOTES' })
+    this.reloadList()
+  },
+
+  deletePermanently (notebookId) {
+    wsHelper.getConn().send({
+      op: 'DEL_NOTE',
+      data: {
+        id: notebookId
+      }
+    })
+
+    // Reload the notebook list
+    this.reloadList()
+  },
+
+  restore (notebookId) {
+    wsHelper.getConn().send({
+      op: 'RESTORE_NOTE',
+      data: {
+        id: notebookId
+      }
+    })
+
+    // Reload the notebook list
+    this.reloadList()
   }
 }

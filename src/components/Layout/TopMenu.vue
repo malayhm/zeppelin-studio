@@ -121,7 +121,7 @@
             <li class="separator"></li>
             <li>
               <a
-                @click="executeNotebookCommand('clear-output')"
+                @click="showConfirmClearOutput"
                 v-bind:class="{'disabled': !(isActiveNotebook)}"
                 href="javascript:void(0)"
               >
@@ -364,6 +364,18 @@ export default {
       if (this.isActiveNotebook) {
         this.$root.executeCommand('notebook', command)
       }
+    },
+    showConfirmClearOutput () {
+      let that = this
+      this.$confirm({
+        title: 'Do you want to clear the ouput for all the paragraphs?',
+        onOk () {
+          that.executeNotebookCommand('clear-output')
+
+          that.$message.success('Output cleared successfully for all the paragraphs.', 4)
+        },
+        onCancel () {}
+      })
     }
   }
 }

@@ -66,6 +66,9 @@ export default {
         case 'delete-temporary':
           notebookUtils.deleteTemporary(notebook.id)
           break
+        case 'restore-notebook':
+          notebookUtils.restore(notebook.id)
+          break
         case 'delete-permanently':
           break
         case 'clone':
