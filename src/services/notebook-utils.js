@@ -10,6 +10,15 @@ export default {
     wsHelper.getConn().send({ op: 'LIST_NOTES' })
   },
 
+  reloadNotebook (notebookId) {
+    wsFactory.getConn(notebookId).send({
+      op: 'GET_NOTE',
+      data: {
+        id: notebookId
+      }
+    })
+  },
+
   exportJSON (notebook) {
     let exportObj = notebook
     let exportName = notebook.id

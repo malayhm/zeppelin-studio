@@ -74,6 +74,7 @@ export default {
         case 'clone':
           break
         case 'reload':
+          notebookUtils.reloadNotebook(notebook.id)
           break
         case 'show-toc':
           break
@@ -108,11 +109,23 @@ export default {
       // let paragraphId = ??
 
       switch (command) {
+        case 'new-text':
+          break
+        case 'new-code':
+          break
         case 'run':
+          break
+        case 'disable-run':
+          break
+        case 'enable-run':
           break
         case 'clone':
           break
+        case 'clear-output':
+          break
         case 'delete':
+          break
+        case 'copy-id':
           break
         case 'toggle-code':
           break
