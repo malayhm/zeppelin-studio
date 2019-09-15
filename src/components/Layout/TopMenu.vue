@@ -366,6 +366,10 @@ export default {
       }
     },
     showConfirmClearOutput () {
+      if (!this.isActiveNotebook) {
+        return
+      }
+
       let that = this
       this.$confirm({
         title: 'Do you want to clear the ouput for all the paragraphs?',

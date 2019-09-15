@@ -28,6 +28,7 @@
     "vue-awesome": "^3.5.4",
     "vue-clickaway": "^2.2.2",
     "vue-global-events": "^1.1.2",
+    "vue-i18n": "^8.14.1",
     "vue-offline": "^2.0.8",
     "vue-router": "^3.0.3",
     "vue-shortkey": "^3.1.7",

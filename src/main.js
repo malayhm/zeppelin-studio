@@ -16,6 +16,7 @@ import 'ant-design-vue/dist/antd.css'
 import api from '@/services/api.js'
 import { EventBus } from '@/services/event-bus'
 import commandManager from '@/services/command-manager'
+import { i18n } from '@/i18n'
 
 window.$ = window.jQuery = require('jquery')
 
@@ -58,6 +59,7 @@ Vue.use(VueOffline, {
         },
         router,
         store,
+        i18n,
         render: h => h(App),
         renderError (h, err) {
           return h('pre', { style: { color: 'red' } }, err.stack)
