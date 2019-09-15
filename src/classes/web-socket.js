@@ -90,9 +90,10 @@ export default class WsConnection {
       }
 
       switch (op) {
-        // notebook
+        // ---------------- Notebook ---------------------------
         case 'NEW_NOTE':
-          window.open(`/notebook/${data.note.id}`, '_blank')
+          // window.open(`/notebook/${data.note.id}`, '_blank')
+          // Pending - open the notebook tab data.note
           break
         case 'NOTES_INFO':
           this.store.dispatch('setNoteMenu', data)
@@ -100,7 +101,8 @@ export default class WsConnection {
         case 'NOTE':
           this.store.dispatch('setNotebookContent', data)
           break
-        // paragraph
+
+        // ---------------- Paragraph ---------------------------
         case 'PARAGRAPH':
           // we are already updating the local copy
           // of paragraphs so do not update again from
@@ -113,6 +115,8 @@ export default class WsConnection {
         case 'PARAGRAPH_ADDED':
           this.store.dispatch('setParagraph', data)
           break
+
+        // ---------------- Other ---------------------------
         // interpreter
         case 'INTERPRETER_STATUS':
           break

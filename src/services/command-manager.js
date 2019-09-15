@@ -11,27 +11,44 @@ export default {
     this.setupParagraphCommands(store)
   },
 
+  openSystemTabs (tabType, store) {
+    let tabName = tabType
+      .replace('-', ' ')
+      .replace(/\w+/g, function (w) {
+        return w[0].toUpperCase() + w.slice(1).toLowerCase()
+      })
+
+    let tab = {
+      id: 'zeppelin-system-' + tabName,
+      name: tabName,
+      type: tabType,
+      path: '/zeppelin-system/' + tabName
+    }
+
+    store.dispatch('addTab', tab)
+  },
+
   setupTabCommands (store) {
-    EventBus.$on('show-tab', tabType => {
-      let tabName = tabType
-        .replace('-', ' ')
-        .replace(/\w+/g, function (w) {
-          return w[0].toUpperCase() + w.slice(1).toLowerCase()
-        })
+    EventBus.$on('tabs', (command, args) => {
+      // command is always open for now
+      let tabType = args.type
 
-      let tab = {
-        id: 'zeppelin-system-' + tabName,
-        name: tabName,
-        type: tabType,
-        path: '/zeppelin-system/' + tabName
+      switch (tabType) {
+        case 'interpreters':
+        case 'configurations':
+        case 'credentials':
+        case 'notebook-repository':
+          this.openSystemTabs(tabType, store)
+          break
+        case 'notebook':
+          notebookUtils.open(args.notebook)
+          break
       }
-
-      store.dispatch('addTab', tab)
     })
   },
 
   setupNotebookCommands (store) {
-    EventBus.$on('notebook', (command) => {
+    EventBus.$on('notebook', (command, args) => {
       let isActiveNotebook = (store.state.TabManagerStore.currentTab &&
                               store.state.TabManagerStore.currentTab.type === 'notebook')
 
@@ -42,6 +59,7 @@ export default {
 
       switch (command) {
         case 'new':
+          notebookUtils.create(args)
           break
         case 'import-json':
           break
@@ -97,7 +115,7 @@ export default {
   },
 
   setupParagraphCommands (store) {
-    EventBus.$on('paragraph', (command) => {
+    EventBus.$on('paragraph', (command, args) => {
       let isActiveNotebook = (store.state.TabManagerStore.currentTab &&
                               store.state.TabManagerStore.currentTab.type === 'notebook')
 

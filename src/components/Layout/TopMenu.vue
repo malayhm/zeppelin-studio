@@ -358,7 +358,7 @@ export default {
       this.$store.dispatch('togglePreferences', true)
     },
     openTab (tabName) {
-      this.$root.executeCommand('show-tab', tabName)
+      this.$root.executeCommand('tabs', 'open', { type: tabName })
     },
     executeNotebookCommand (command) {
       if (this.isActiveNotebook) {

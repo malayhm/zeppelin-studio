@@ -10,6 +10,10 @@ export default {
     wsHelper.getConn().send({ op: 'LIST_NOTES' })
   },
 
+  getFileName (path) {
+    return path.substr(path.lastIndexOf('/') + 1)
+  },
+
   reloadNotebook (notebookId) {
     wsFactory.getConn(notebookId).send({
       op: 'GET_NOTE',
@@ -17,6 +21,29 @@ export default {
         id: notebookId
       }
     })
+  },
+
+  create (params) {
+    wsHelper.getConn().send({
+      op: 'NEW_NOTE',
+      data: {
+        name: params.name,
+        defaultInterpreterGroup: params.defaultInterpreter
+      }
+    })
+
+    // Reload the left sidebar
+    this.reloadList()
+
+    // Pending - open the notebook
+  },
+
+  open (notebook) {
+    wsFactory.initNotebookConnection(notebook.id, this.store)
+
+    notebook.name = this.getFileName(notebook.path)
+    notebook.type = 'notebook'
+    this.store.dispatch('addTab', notebook)
   },
 
   exportJSON (notebook) {

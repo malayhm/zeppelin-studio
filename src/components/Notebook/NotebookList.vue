@@ -64,7 +64,6 @@
 
 <script>
 import ws from '@/services/ws-helper'
-import wsFactory from '@/services/ws-factory'
 
 export default {
   name: 'StatusBar',
@@ -96,12 +95,11 @@ export default {
     // }
   },
   methods: {
-    openNotebook (note) {
-      wsFactory.initNotebookConnection(note.id, this.$store)
-
-      note.name = this.getFileName(note.path)
-      note.type = 'notebook'
-      this.$store.dispatch('addTab', note)
+    openNotebook (notebook) {
+      this.$root.executeCommand('tabs', 'open', {
+        type: 'notebook',
+        notebook: notebook
+      })
     },
     getFileName (path) {
       return path.substr(path.lastIndexOf('/') + 1)
