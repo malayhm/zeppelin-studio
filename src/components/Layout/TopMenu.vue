@@ -372,11 +372,11 @@ export default {
 
       let that = this
       this.$confirm({
-        title: 'Do you want to clear the ouput for all the paragraphs?',
+        title: that.$i18n.t('message.notebooks.clear_output_confirm'),
         onOk () {
           that.executeNotebookCommand('clear-output')
 
-          that.$message.success('Output cleared successfully for all the paragraphs.', 4)
+          that.$message.success(that.$18n.t('message.notebooks.clear_output_success'), 4)
         },
         onCancel () {}
       })

@@ -12,7 +12,13 @@ export const i18n = new VueI18n({
   messages: {
     en: {
       message: {
-        hello: 'hello world'
+        notebooks: {
+          clear_output_confirm: 'Do you want to clear the ouput for all the paragraphs?',
+          clear_output_success: 'Output cleared successfully for all the paragraphs.',
+          move_to_rb_confirm: 'Do you want to delete this Notebook?',
+          move_to_rb_content: 'This will move the notebook to Recycle Bin and you can still recover it.',
+          move_to_rb_success: 'Notebook moved to recycle bin successfully.'
+        }
       }
     },
     ja: {

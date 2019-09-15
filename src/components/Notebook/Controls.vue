@@ -140,12 +140,12 @@ export default {
     showDeleteConfirm () {
       let that = this
       this.$confirm({
-        title: 'Do you want to delete this Notebook?',
-        content: 'This will move the notebook to Recycle Bin and you can still recover it.',
+        title: that.$i18n.t('message.notebooks.move_to_rb_confirm'),
+        content: that.$i18n.t('message.notebooks.move_to_rb_content'),
         onOk () {
           that.executeNotebookCommand('delete-temporary')
 
-          that.$message.success('Notebook moved to recycle bin successfully.', 4)
+          that.$message.success(that.$i18n.t('message.notebooks.move_to_rb_success'), 4)
         },
         onCancel () {}
       })
