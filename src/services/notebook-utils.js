@@ -1,3 +1,5 @@
+import { EventBus } from '@/services/event-bus'
+
 import wsHelper from '@/services/ws-helper'
 import wsFactory from '@/services/ws-factory'
 
@@ -23,6 +25,10 @@ export default {
     })
   },
 
+  showCreateModal () {
+    EventBus.$emit('showCreateNotebookDialog', true)
+  },
+
   create (params) {
     wsHelper.getConn().send({
       op: 'NEW_NOTE',
@@ -35,7 +41,7 @@ export default {
     // Reload the left sidebar
     this.reloadList()
 
-    // Pending - open the notebook
+    // Pending - open the notebook after create
   },
 
   open (notebook) {
@@ -44,6 +50,38 @@ export default {
     notebook.name = this.getFileName(notebook.path)
     notebook.type = 'notebook'
     this.store.dispatch('addTab', notebook)
+  },
+
+  showCloneModal (id) {
+    EventBus.$emit('showCloneNotebookDialog', id)
+  },
+
+  clone (params) {
+    wsFactory.getConn(params.sourceNotebookId).send({
+      op: 'CLONE_NOTE',
+      data: {
+        id: params.sourceNotebookId,
+        name: params.newNotebookName
+      }
+    })
+
+    // Reload the left sidebar
+    this.reloadList()
+
+    // Pending - open the notebook after clone
+  },
+
+  showImportModal () {
+    EventBus.$emit('showImportNotebookDialog', true)
+  },
+
+  importJSON (notebook) {
+    wsHelper.getConn().send({
+      op: 'IMPORT_NOTE',
+      data: {
+        note: notebook
+      }
+    })
   },
 
   exportJSON (notebook) {

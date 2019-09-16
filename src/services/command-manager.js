@@ -52,16 +52,23 @@ export default {
       let isActiveNotebook = (store.state.TabManagerStore.currentTab &&
                               store.state.TabManagerStore.currentTab.type === 'notebook')
 
-      if (!isActiveNotebook) {
+      if (!(isActiveNotebook || ['show-create', 'create', 'show-import', 'import-json'].indexOf(command) !== -1)) {
         return
       }
       let notebook = store.state.TabManagerStore.currentTab
 
       switch (command) {
-        case 'new':
+        case 'show-create':
+          notebookUtils.showCreateModal()
+          break
+        case 'create':
           notebookUtils.create(args)
           break
+        case 'show-import':
+          notebookUtils.showImportModal()
+          break
         case 'import-json':
+          notebookUtils.importJSON(args)
           break
         case 'clear-output':
           notebookUtils.clearAllOutputs(notebook.id)
@@ -89,7 +96,11 @@ export default {
           break
         case 'delete-permanently':
           break
+        case 'show-clone':
+          notebookUtils.showCloneModal(notebook.id)
+          break
         case 'clone':
+          notebookUtils.clone(args)
           break
         case 'reload':
           notebookUtils.reloadNotebook(notebook.id)

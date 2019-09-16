@@ -1,12 +1,13 @@
 <template>
   <div class="configurations">
-    <h6>Zeppelin Server Configurations</h6>
+    <h6>Server Configurations</h6>
 
     <a-table
       :columns="columns"
       :dataSource="configurationList"
       size="small"
-      pagination="false"
+      :pagination="false"
+      :scroll="{ y: 440 }"
     />
 
     <a-alert message="Note: For security reasons, some key/value pairs including passwords would not be shown." type="info" />
@@ -21,17 +22,17 @@ export default {
     return {
       columns: [{
         title: 'Name',
-        dataIndex: 'name',
+        dataIndex: 'name'
       }, {
         title: 'Value',
-        dataIndex: 'value',
+        dataIndex: 'value'
       }]
     }
   },
   computed: {
     configurationList () {
       let configurations = []
-      for(let key in this.$store.state.configurations) {
+      for (let key in this.$store.state.configurations) {
         configurations.push({
           name: key,
           value: this.$store.state.configurations[key]

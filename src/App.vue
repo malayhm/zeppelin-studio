@@ -17,10 +17,13 @@
     <StatusBar />
 
     <GlobalEvents
-      @keyup.ctrl.n="executeCommand('notebook', 'new')"
+      @keyup.ctrl.n="executeCommand('notebook', 'show-create')"
       @keyup.ctrl.f="executeCommand('notebook', 'find-and-replace')"
       @keyup.ctrl.r="executeCommand('notebook', 'run-all')"
     />
+
+    <Create />
+    <Import />
   </div>
 </template>
 
@@ -35,14 +38,23 @@ import LeftSidebar from '@/components/Layout/LeftSideBar.vue'
 import StatusBar from '@/components/Layout/StatusBar.vue'
 import Preferences from '@/components/Tools/Preferences.vue'
 
+import Create from '@/components/Notebook/Create.vue'
+import Import from '@/components/Notebook/Import.vue'
+
 export default {
   name: 'App',
-  components: { GlobalEvents, Header, LeftSidebar, StatusBar, Preferences },
+  components: { GlobalEvents, Header, LeftSidebar, StatusBar, Preferences, Create, Import },
   created () {
     document.title = 'Zeppelin Studio'
   },
   beforeMount () {
     ws.init(this)
+
+    // get interpreters for notebook creation
+    this.$store.dispatch('getInterpreters')
+  },
+  computed: {
+
   },
   mounted () {
 

@@ -7,7 +7,7 @@
           <ul>
             <li>
               <a
-                @click="executeNotebookCommand('new')"
+                @click="executeNotebookCommand('show-create')"
                 href="javascript:void(0)"
               >
                 New Notebook <span>Ctrl+N</span>
@@ -15,7 +15,7 @@
             </li>
             <li>
               <a
-                @click="executeNotebookCommand('import-json')"
+                @click="executeNotebookCommand('show-import')"
                 href="javascript:void(0)"
               >
                 Import
@@ -361,7 +361,7 @@ export default {
       this.$root.executeCommand('tabs', 'open', { type: tabName })
     },
     executeNotebookCommand (command) {
-      if (this.isActiveNotebook) {
+      if (this.isActiveNotebook || ['show-create', 'show-import'].indexOf(command) !== -1) {
         this.$root.executeCommand('notebook', command)
       }
     },

@@ -27,7 +27,7 @@
 
       <a
         href="javascript: void(0);"
-        @click="executeNotebookCommand('clone')"
+        @click="executeNotebookCommand('show-clone')"
       >
         <a-tooltip placement="top">
           <template slot="title">

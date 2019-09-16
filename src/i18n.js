@@ -13,6 +13,11 @@ export const i18n = new VueI18n({
     en: {
       message: {
         notebooks: {
+          create_success: 'Notebook created successfully.',
+          import_success: 'Notebook imported successfully.',
+          import_json_type_error: 'You can only upload JSON file!',
+          import_json_size_error: 'File must be smaller than 1 MB!',
+          clone_success: 'Notebook cloned successfully.',
           clear_output_confirm: 'Do you want to clear the ouput for all the paragraphs?',
           clear_output_success: 'Output cleared successfully for all the paragraphs.',
           move_to_rb_confirm: 'Do you want to delete this Notebook?',
