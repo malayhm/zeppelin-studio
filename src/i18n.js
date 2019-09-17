@@ -14,6 +14,7 @@ export const i18n = new VueI18n({
       message: {
         notebooks: {
           create_success: 'Notebook created successfully.',
+          import_click_or_drag: 'Click or drag a file to upload',
           import_success: 'Notebook imported successfully.',
           import_json_type_error: 'You can only upload JSON file!',
           import_json_size_error: 'File must be smaller than 1 MB!',

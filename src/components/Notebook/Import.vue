@@ -29,9 +29,13 @@
           v-if="importType === 'file'"
           id="notebook-import-drag-drop"
           class="ant-upload ant-upload-drag"
+          v-bind:class="{'hover': isFileDragHover}"
           style="margin-bottom: 16px; display: block;"
           @click="showFileDialog"
           @change="handleChange"
+          @drop.prevent="handleChange"
+          @dragover.prevent="handleDragHover"
+          @dragleave.prevent="handleDragHover"
         >
           <input
             type="file"
@@ -44,7 +48,7 @@
           </p>
           <p class="ant-upload-text" style="font-size: 13px;">
             <span v-if="sourceNotebookFile">{{ this.sourceNotebookFile.name }}</span>
-            <span v-else>Click here to upload a file</span>
+            <span v-else>{{ $t("message.notebooks.import_click_or_drag") }}</span>
           </p>
         </div>
 
@@ -61,8 +65,7 @@
           <a-input placeholder="Enter Notebook Name"  v-model="name"/>
         </a-form-item>
 
-        <a-form-item
-          v-if="1 == 2"
+        <!-- <a-form-item
           label="Default Interpreter"
         >
           <a-select
@@ -78,7 +81,7 @@
               {{interpreter.id}}
             </a-select-option>
           </a-select>
-        </a-form-item>
+        </a-form-item> -->
       </a-form>
     </a-modal>
   </div>
@@ -93,6 +96,7 @@ export default {
     return {
       showDialog: false,
       loading: false,
+      isFileDragHover: false,
 
       name: '',
       defaultInterpreter: null,
@@ -118,16 +122,19 @@ export default {
       this.$refs.nbFileInput.click()
     },
     handleChange (e) {
-      let validated = e.target.files.length !== 0 && this.beforeUpload(e.target.files[0])
+      this.handleDragHover(e)
+
+      let files = e.target.files || e.dataTransfer.files
+      let validated = files.length !== 0 && this.beforeUpload(files[0])
       if (validated) {
-        this.sourceNotebookFile = e.target.files[0]
+        this.sourceNotebookFile = files[0]
 
         let reader = new FileReader()
         reader.readAsText(this.sourceNotebookFile)
         reader.onloadend = () => {
           this.sourceNotebookJSON = JSON.parse(reader.result)
           this.fileUploaded = true
-        };
+        }
       } else {
         this.sourceNotebookFile = null
         this.sourceNotebookJSON = null
@@ -137,11 +144,11 @@ export default {
     beforeUpload (file) {
       const isJSON = (file.type === 'application/json')
       if (!isJSON) {
-        this.$message.error(that.$i18n.t('message.notebooks.import_json_type_error'))
+        this.$message.error(this.$i18n.t('message.notebooks.import_json_type_error'), 4)
       }
       const isLt1M = file.size / 1024 / 1024 < 1
       if (!isLt1M) {
-        this.$message.error(that.$i18n.t('import_json_size_error'))
+        this.$message.error(this.$i18n.t('message.notebooks.import_json_size_error'), 4)
       }
       return isJSON && isLt1M
     },
@@ -151,31 +158,43 @@ export default {
       this.sourceNotebookJSON.name = this.name
       this.$root.executeCommand('notebook', 'import-json', this.sourceNotebookJSON)
 
-      let that = this
+      // let that = this
       setTimeout(() => {
         this.showDialog = false
         this.loading = false
 
         this.resetForm()
 
-        that.$message.success(that.$i18n.t('message.notebooks.import_success'), 4)
+        this.$message.success(this.$i18n.t('message.notebooks.import_success'), 4)
         // Pending - validation
         // Pending open - imported Notebook
       }, 1000)
     },
     handleCancel (e) {
       this.showDialog = false
+      this.resetForm()
     },
     resetForm () {
       this.name = ''
-      this.defaultInterpreter = ''
+      this.defaultInterpreter = null
+
+      this.importType = 'file',
+      this.sourceNotebookFile = null
+      this.sourceNotebookJSON = null
+      this.fileUploaded = false
     },
     changeImportType (e) {
       this.importType = e.target.value
+    },
+    handleDragHover (e) {
+      this.isFileDragHover = e.type === 'dragover'
     }
   }
 }
 </script>
 
 <style lang="scss">
+.hover {
+  border-color: #505050 !important;
+}
 </style>
